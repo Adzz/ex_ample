@@ -22,7 +22,7 @@ Today we will be looking at a small example of how you might structure an umbrel
 So far to create this repo, we first ran this task:
 
 ```sh
-$mix new ex_ample --umbrella
+mix new ex_ample --umbrella
 ```
 
 The name of the app is `ex_ample`, and the umbrella flag does exactly what you think it does.
@@ -34,7 +34,7 @@ The name of the app is `ex_ample`, and the umbrella flag does exactly what you t
 To add new apps to the umbrella project we can do this (from the root of the project):
 
 ```sh
-$cd apps && mix new ex_ample_backend --sup
+cd apps && mix new ex_ample_backend --sup
 ```
 
 The `sup` flag stands for supervision, it just tells Mix to generate a supervision tree automatically for us, instead of having to build one manually. More in [the docs](https://elixir-lang.org/getting-started/mix-otp/dependencies-and-umbrella-projects.html#dont-drink-the-kool-aid) 👩‍⚕️
