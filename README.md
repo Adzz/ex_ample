@@ -1,6 +1,6 @@
 # ExAmple
 
-### Umbrella projects - Coding in the Rain
+## Umbrella projects - Coding in the Rain
 
 [Umbrella projects](https://8thlight.com/blog/georgina-mcfadyen/2017/05/01/elixir-umbrella-projects.html) are a great way to manage internal dependancies for your applications. Internal dependencies can be thought of as libraries that can sit on their own - but that you don't want to or cannot open source. They are things that you can configure their own relases for (so can be released independently from the rest of the application), but are conveniently grouped together into one git repo.
 
@@ -34,13 +34,20 @@ The name of the app is `ex_ample`, and the umbrella flag does exactly what you t
 To add new apps to the umbrella project we can do this (from the root of the project):
 
 ```sh
-cd apps && mix new ex_ample_backend --sup
+cd apps && mix new name_of_the_app --sup
 ```
 
 The `sup` flag stands for supervision, it just tells Mix to generate a supervision tree automatically for us, instead of having to build one manually. More in [the docs](https://elixir-lang.org/getting-started/mix-otp/dependencies-and-umbrella-projects.html#dont-drink-the-kool-aid) 👩‍⚕️
 
 
-This generated a scaffold of the code you can see in `apps/ex_ample_backend`. We have implemented a VERY simple database, faff with setting up postgres. I don't recommend that you read it, unless you have a penchant for punishment. I certainly don't recomend you use it past this exercise.
+We have already added an app called `ex_ample_backend`. This will act as the datasource for our application. It has VERY limited capabilities. I don't recommend that you read the code unless you have a penchant for punishment. I certainly don't recomend you use it past this exercise.
+
+## The Mission
+
+Your job is to:
+
+ - Add a new app to the umbrella project. Call it what you like, but it will act as the webserver layer for this project
+ - It should be a phoenix app with the absinthe library as a dep.
 
 
 
