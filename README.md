@@ -40,8 +40,7 @@ $cd apps && mix new ex_ample_backend --sup
 The `sup` flag stands for supervision, it just tells Mix to generate a supervision tree automatically for us, instead of having to build one manually. More in [the docs](https://elixir-lang.org/getting-started/mix-otp/dependencies-and-umbrella-projects.html#dont-drink-the-kool-aid) 👩‍⚕️
 
 
-This generated the code you can see in `apps/ex_ample_backend`
-
+This generated a scaffold of the code you can see in `apps/ex_ample_backend`. We have implemented a VERY simple database, faff with setting up postgres. I don't recommend that you read it, unless you have a penchant for punishment. I certainly don't recomend you use it past this exercise.
 
 
 

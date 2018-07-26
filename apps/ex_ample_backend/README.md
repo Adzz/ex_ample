@@ -1,21 +1,8 @@
 # ExAmpleBackend
 
-**TODO: Add description**
-
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `ex_ample_backend` to your list of dependencies in `mix.exs`:
+<!-- write better funnier docs -->
+This is a badly implemented database for example purposes only. It has a very limited set of capabilities.
 
-```elixir
-def deps do
-  [
-    {:ex_ample_backend, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/ex_ample_backend](https://hexdocs.pm/ex_ample_backend).
-
+Look at the DB module to get a feel for the things that you can query.
