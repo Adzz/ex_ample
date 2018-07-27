@@ -16,7 +16,7 @@ defmodule DB do
     data_source.get(data_source, attrs)
   end
 
-  def update(data_source, record, changes) do
-    data_source.update(data_source, record, changes)
+  def update(record, changes) do
+    record.module.update(record.module, record, changes)
   end
 end
