@@ -51,9 +51,9 @@ Your job is to:
     - [Absinthe](https://github.com/absinthe-graphql/absinthe)
     - [Jason](https://github.com/michalmuskala/jason)
     - [Absinthe Plug](https://github.com/absinthe-graphql/absinthe_plug)
-  3. Add a plug for your schema
-  4. Add a plug for parsing JSON
-  5. Adda route for graphql requests
-  6. Add a route for [graphiql](https://github.com/graphql/graphiql) requests (they are different things!), but only for dev
+  3. Alter the plug for parsing JSON to use the Jason lib (the default is Poison)
+  4. Add a route for graphql requests
+  5. Add a route for [graphiql](https://github.com/graphql/graphiql) requests (they are different things!), but only for dev
+  6. Add a basic schema, with the simplest query you can imagine.
 
-We will step through this together.
+But do not fear, we will step through this together!
