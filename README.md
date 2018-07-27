@@ -46,5 +46,14 @@ We have already added an app called `ex_ample_backend`. This will act as the dat
 
 Your job is to:
 
- - Add a new app to the umbrella project. Call it what you like, but it will act as the webserver layer for this project
- - It should be a phoenix app with the absinthe library as a dep. (Hint, we don't need ecto, html, or brunch!)
+  1. Add a new app to the umbrella project. Call it what you like, but it will act as the webserver layer for this project. It should be a phoenix app, but we don't need ecto, html, or brunch!
+  2. Add the following deps to it:
+    - [Absinthe](https://github.com/absinthe-graphql/absinthe)
+    - [Jason](https://github.com/michalmuskala/jason)
+    - [Absinthe Plug](https://github.com/absinthe-graphql/absinthe_plug)
+  3. Add a plug for your schema
+  4. Add a plug for parsing JSON
+  5. Adda route for graphql requests
+  6. Add a route for [graphiql](https://github.com/graphql/graphiql) requests (they are different things!), but only for dev
+
+We will step through this together.
