@@ -57,3 +57,79 @@ Your job is to:
   6. Make a successful `hello` request using graphiql
 
 But do not fear, we will step through this together!
+
+## The Answers
+
+1. To complete the mission, we had to [read this](https://hexdocs.pm/phoenix/up_and_running.html) then do this:
+
+```sh
+mix archive.install https://github.com/phoenixframework/archives/raw/master/phx_new.ez
+cd apps
+mix phx.new graphql --no-ecto --no-brunch --no-html
+```
+
+2. Then we needed to add the deps so that our `deps` function in the `mix.exs` file looks like this:
+
+```elixir
+  defp deps do
+    [
+      {:phoenix, "~> 1.3.3"},
+      {:phoenix_pubsub, "~> 1.0"},
+      {:gettext, "~> 0.11"},
+      {:cowboy, "~> 1.0"},
+      {:absinthe, "~> 1.4.0"},
+      {:absinthe_plug, "~> 1.4.0"},
+      {:jason, "~> 1.1"}
+    ]
+  end
+```
+
+3. Altering the plug to use the Jason lib, looked something like this (inside of `apps/graphql/lib/graphql_web/endpoint.ex`):
+
+```elixir
+  plug(
+    Plug.Parsers,
+    parsers: [:json],
+    pass: ["*/*"],
+    json_decoder: Jason,
+    schema: Graphql.Schema
+  )
+```
+
+4 and 5. The router file `apps/graphql/lib/graphql_web/router.ex` should now look like this:
+
+```elixir
+  scope "/graphql" do
+    forward(
+      "/",
+      Absinthe.Plug,
+      schema: Graphql.Schema,
+      json_codec: Jason
+    )
+  end
+
+  if Mix.env() == :dev do
+    forward(
+      "/graphiql",
+      Absinthe.Plug.GraphiQL,
+      schema: Graphql.Schema,
+      json_codec: Jason,
+      default_url: "/graphql",
+      interface: :advanced
+    )
+  end
+```
+
+And finally for 6 we added a schema file here `apps/graphql/lib/graphql_web/schema.ex` that looks like this:
+
+```elixir
+defmodule Graphql.Schema do
+  use Absinthe.Schema
+
+  query do
+    field(:hello, type: :string, resolve: fn _, _, _ -> {:ok, "It's alive"} end)
+  end
+end
+
+```
+
