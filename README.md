@@ -47,7 +47,4 @@ We have already added an app called `ex_ample_backend`. This will act as the dat
 Your job is to:
 
  - Add a new app to the umbrella project. Call it what you like, but it will act as the webserver layer for this project
- - It should be a phoenix app with the absinthe library as a dep.
-
-
-
+ - It should be a phoenix app with the absinthe library as a dep. (Hint, we don't need ecto or brunch!)
