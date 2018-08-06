@@ -54,6 +54,6 @@ Your job is to:
   3. Alter the plug for parsing JSON to use the Jason lib (the default is Poison)
   4. Add a route for graphql requests
   5. Add a route for [graphiql](https://github.com/graphql/graphiql) requests (they are different things!), but only for dev
-  6. Add a basic schema, with the simplest query you can imagine.
+  6. Make a successful `hello` request using graphiql
 
 But do not fear, we will step through this together!
