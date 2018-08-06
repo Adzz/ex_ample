@@ -16,7 +16,10 @@ defmodule DB do
     data_source.get(data_source, attrs)
   end
 
+  @doc "Updates the given record to have the changes supplied. Returns the updated record"
   def update(record, changes) do
-    record.module.update(record.module, record, changes)
+    data_source = record.module
+    data_source.update(data_source, record, changes)
+    get(data_source, changes)
   end
 end

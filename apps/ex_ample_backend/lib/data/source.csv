@@ -1,4 +1,4 @@
-id,property_id,full address,postcode,activity period,property type,average time to sold,average time to exchange,average sale price,average price reduction
-
-
-average sale price from Land Reg
+date_sold,house_number,id,postcode,sale_price
+1975-05-05,1,1,PO2 OAP,4
+1980-05-05,1,2,PO2 OAP,300000
+2010-05-05,2,3,SW7 1AZ,500000

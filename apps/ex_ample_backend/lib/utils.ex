@@ -9,7 +9,8 @@ defmodule DB.Utils do
         |> Enum.map(fn {_, i} -> i end)
         |> hd()
 
-      List.update_at(data, index, fn record -> Map.merge(record, Enum.into(changes, %{})) end)
+      {:ok,
+       List.update_at(data, index, fn record -> Map.merge(record, Enum.into(changes, %{})) end)}
     else
       {:error, "You are trying to change a column that doesn't exist on the data! :("}
     end

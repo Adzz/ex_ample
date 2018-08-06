@@ -10,10 +10,17 @@ defmodule LandRegData do
   """
   use GenServer
 
+  @data_path "apps/ex_ample_backend/lib/data/source.csv"
   # could parse this from CSV headers?
-  @columns [:id, :sale_price, :postcode, :house_number_or_name, :date_sold]
-  @column_set MapSet.new(@columns)
-  defstruct @columns ++ [module: __MODULE__]
+  @columns %{
+    id: :number,
+    sale_price: :number,
+    postcode: :string,
+    house_number: :number,
+    date_sold: :date
+  }
+  @column_set MapSet.new(Map.keys(@columns))
+  defstruct Map.keys(@columns) ++ [module: __MODULE__]
 
   ## Client API
 
@@ -54,37 +61,49 @@ defmodule LandRegData do
 
   @impl true
   def handle_cast({:update, record, changes}, data) do
-    updated_record = DB.Utils.update_record(record, changes, @column_set, data)
-
-    case updated_record do
-      {:error, error} -> IO.inspect(error)
-      _ -> {:noreply, updated_record}
+    with {:ok, updated_data} <- DB.Utils.update_record(record, changes, @column_set, data),
+         :ok <- write_to_file(updated_data) do
+      {:noreply, updated_data}
+    else
+      error -> IO.inspect(error)
     end
   end
 
   defp starting_data() do
-    [
-      %LandRegData{
-        id: 1,
-        house_number_or_name: "1",
-        postcode: "PO2 OAP",
-        sale_price: 200_000,
-        date_sold: ~D[1975-05-05]
-      },
-      %LandRegData{
-        id: 2,
-        house_number_or_name: "1",
-        postcode: "PO2 OAP",
-        sale_price: 300_000,
-        date_sold: ~D[1980-05-05]
-      },
-      %LandRegData{
-        id: 3,
-        house_number_or_name: "2",
-        postcode: "SW7 1AZ",
-        sale_price: 500_000,
-        date_sold: ~D[2010-05-05]
-      }
-    ]
+    @data_path
+    |> File.stream!()
+    |> CSV.decode!(headers: true)
+    |> Enum.map(&atomize_keys/1)
+    |> Enum.map(&transform_to_struct/1)
   end
+
+  def transform_to_struct(data) when is_map(data) do
+    struct(__MODULE__, cast_data(data))
+  end
+
+  def atomize_keys(map) when is_map(map) do
+    for {k, v} <- map, do: {String.to_existing_atom(k), v}, into: %{}
+  end
+
+  def write_to_file(data) do
+    file = File.open!(@data_path, [:write, :utf8])
+
+    data
+    |> Enum.map(&Map.from_struct(&1))
+    |> Enum.map(&Map.drop(&1, [:module]))
+    |> CSV.Encoding.Encoder.encode(headers: true)
+    |> Enum.each(&IO.write(file, &1))
+
+    :ok
+  end
+
+  def cast_data(data) do
+    for {key, value} <- Map.drop(data, [:module]),
+        do: {key, format_data(value, Map.fetch!(@columns, key))},
+        into: %{}
+  end
+
+  def format_data(datum, :number), do: String.to_integer(datum)
+  def format_data(datum, :date), do: Date.from_iso8601!(datum)
+  def format_data(datum, :string), do: datum
 end
