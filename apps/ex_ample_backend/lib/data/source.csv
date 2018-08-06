@@ -1,4 +1,4 @@
-date_sold,house_number,id,postcode,sale_price
-1975-05-05,1,1,PO2 OAP,4
-1980-05-05,1,2,PO2 OAP,300000
-2010-05-05,2,3,SW7 1AZ,500000
+date_sold,house_number,id,postcode,sale_price,average_time_to_sold
+1975-05-05,1,1,PO2 OAP,4,120
+1980-05-05,1,2,PO2 OAP,300000,150
+2010-05-05,2,3,SW7 1AZ,500000,130
