@@ -20,6 +20,10 @@ defmodule DB do
   def update(record, changes) do
     data_source = record.module
     data_source.update(data_source, record, changes)
-    get(data_source, changes)
+  end
+
+  @doc "Creates a record based on the given data, creates a unique id for the created record and returns the created record"
+  def create(data_source, data) do
+    data_source.create(data_source, data)
   end
 end
