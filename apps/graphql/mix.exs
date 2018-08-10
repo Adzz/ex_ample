@@ -43,7 +43,8 @@ defmodule Graphql.Mixfile do
       {:absinthe, "~> 1.4.0"},
       {:absinthe_plug, "~> 1.4.0"},
       {:jason, "~> 1.1"},
-      {:ex_ample_backend, in_umbrella: true}
+      {:ex_ample_backend, in_umbrella: true},
+      {:cors_plug, "~> 1.5"}
     ]
   end
 end
