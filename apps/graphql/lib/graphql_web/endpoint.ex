@@ -17,6 +17,8 @@ defmodule GraphqlWeb.Endpoint do
     schema: Graphql.Schema
   )
 
+  # Set headers to allow GraphQL requests from client application.
+  plug(CORSPlug)
   plug(GraphqlWeb.Router)
 
   @doc """
