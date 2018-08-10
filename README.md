@@ -188,3 +188,5 @@ Excellent! Now we have addresses, we can take the id of one of those addresses a
 Again we have a failing test in `apps/graphql/test/integration/my_second_query_test.exs` and some hints on what to do in `schema.ex`.
 
 This time our query will need some args...
+
+When it passes try booting the server with `mix phx.server` then head to `localhost:4000/graphiql` and try running the query using graphiql.
