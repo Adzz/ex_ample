@@ -164,4 +164,4 @@ Again we have a failing test in `apps/graphql/test/integration/my_second_query_t
 
 This time our query will need some args...
 
-
+When it passes try booting the server with `mix phx.server` then head to `localhost:4000/graphiql` and try running the query using graphiql.
