@@ -88,6 +88,7 @@ mix phx.new graphql --no-ecto --no-brunch --no-html
       {:phoenix_pubsub, "~> 1.0"},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
+      # these are the deps we added:
       {:absinthe, "~> 1.4.0"},
       {:absinthe_plug, "~> 1.4.0"},
       {:jason, "~> 1.1"}
@@ -138,24 +139,32 @@ defmodule Graphql.Schema do
   use Absinthe.Schema
 
   query do
-    field(:hello, type: :string, resolve: fn _, _, _ -> {:ok, "It's alive"} end)
+    field :is_this_thing_on, type: :string do
+      resolve(&Graphql.Resolver.smoke_test/2)
+    end
+  end
+
+  mutation do
+    field :echo_text, type: :string do
+      arg(:input, :string)
+      resolve(&Graphql.Resolver.test_update/2)
+    end
   end
 end
-
 ```
 
-## My First Query
+We then added a resolver file here: `apps/graphql/lib/graphql_web/resolvers/resolver.ex` which looked like this:
 
-Now that we have successfully wired up our new app, we need to be able to query for some data.
+```elixir
+defmodule Graphql.Resolver do
+  def smoke_test(_args, _info) do
+    {:ok, "Yes!"}
+  end
 
-Our next challenge will be to implement a new query which will get some data from our database, and expose it in our API. Along the way we will learn how Absinthe looks at things, and what we can do about it.
-
-We will implement a query for the Average Time to Sold (STC) for a given house. The query will work by taking in a house number and a postcode, and it will return the STC for that property as is stored in the db. For our query we will use this example property:
-
+  def test_update(%{input: input}, _info) do
+    {:ok, input}
+  end
+end
 ```
-123 Example Lane
-London
-N35 7ED
-```
 
-We will know we have successfully implemented the feature when all the tests are green.
+This resolver pattern is great groundwork for the architecture of the application as it grows, even if it is overkill right now.
