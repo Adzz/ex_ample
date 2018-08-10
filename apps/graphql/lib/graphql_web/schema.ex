@@ -8,7 +8,7 @@ defmodule Graphql.Schema do
   end
 
   object :land_reg_data do
-    # add the sub fields here!
+    # which subfields do we need?
   end
 
   query do
