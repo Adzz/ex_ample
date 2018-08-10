@@ -17,17 +17,31 @@ defmodule DB.Utils do
     end
   end
 
-  def attrs_exist_on_model?(attrs, model) when is_list(attrs) do
-    attr_keys = List.foldr(attrs, [], fn {key, _}, acc -> [key | acc] end) |> MapSet.new()
-
-    if MapSet.subset?(attr_keys, model.column_set) do
-      true
+  def apply_changes(old_record, changes) when is_map(changes) do
+    if attrs_exist_on_model?(changes, old_record.module) do
+      {:ok, Map.merge(old_record, changes)}
     else
-      false
+      {:error, "You are trying to change a column that doesn't exist! :("}
     end
   end
 
-  def query_for_attrs(data, attrs) do
+  def attrs_exist_on_model?(attrs, model) when is_list(attrs) do
+    attr_keys = List.foldr(attrs, [], fn {key, _}, acc -> [key | acc] end) |> MapSet.new()
+    MapSet.subset?(attr_keys, model.column_set)
+  end
+
+  def attrs_exist_on_model?(attrs, model) when is_map(attrs) do
+    attrs
+    |> Map.keys()
+    |> MapSet.new()
+    |> MapSet.subset?(model.column_set)
+  end
+
+  def query_for_attrs(data, attrs) when is_map(attrs) do
+    query_for_attrs(data, Map.to_list(attrs))
+  end
+
+  def query_for_attrs(data, attrs) when is_list(attrs) do
     query_for_attrs(data, attrs, List.first(attrs))
   end
 

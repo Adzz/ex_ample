@@ -13,7 +13,7 @@ defmodule LandRegData do
   @data_path "apps/ex_ample_backend/lib/data/source.csv"
   # could parse this from CSV headers?
   @columns %{
-    id: :number,
+    id: :string,
     sale_price: :number,
     postcode: :string,
     house_number: :number,
@@ -128,6 +128,8 @@ defmodule LandRegData do
         into: %{}
   end
 
+  defp format_data(nil, _), do: nil
+  defp format_data("", type) when type not in [:string], do: nil
   defp format_data(datum, :number), do: String.to_integer(datum)
   defp format_data(datum, :date), do: Date.from_iso8601!(datum)
   defp format_data(datum, :string), do: datum
