@@ -37,14 +37,14 @@ To add new apps to the umbrella project we can do this (from the root of the pro
 cd apps && mix new name_of_the_app --sup
 ```
 
-The `sup` flag stands for supervision, it just tells Mix to generate a supervision tree automatically for us, instead of having to build one manually. More in [the docs](https://elixir-lang.org/getting-started/mix-otp/dependencies-and-umbrella-projects.html#dont-drink-the-kool-aid) 👩‍⚕️
+The `sup` flag stands for supervision, it just tells Mix to generate a supervision tree automatically for us, instead of having to build one manually. More in [the docs 👩‍⚕️](https://elixir-lang.org/getting-started/mix-otp/dependencies-and-umbrella-projects.html#dont-drink-the-kool-aid)
 
 
 We have already added an app called `ex_ample_backend`. This will act as the datasource for our application. It has VERY limited capabilities. I don't recommend that you read the code unless you have a penchant for punishment. I certainly don't recomend you use it past this exercise.
 
-## The Mission
+## Adding a graphql layer
 
-Your job is to:
+We want to:
 
   1. Add a new app to the umbrella project. Call it what you like, but it will act as the webserver layer for this project. It should be a phoenix app, but we don't need ecto, html, or brunch!
   2. Add the following deps to it:
