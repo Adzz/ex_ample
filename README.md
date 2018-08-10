@@ -69,7 +69,7 @@ We want to:
 
 But do not fear, we will step through this together!
 
-## The Answers
+### The Answers
 
 1. To complete the mission, we had to [read this](https://hexdocs.pm/phoenix/up_and_running.html) then do this:
 
