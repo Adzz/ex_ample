@@ -1,1 +1,1 @@
-average_time_to_sold,date_sold,house_number,id,postcode,sale_price
+average_time_to_sold,date_sold,address_id,sale_price,id
