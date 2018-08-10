@@ -42,7 +42,7 @@ The `sup` flag stands for supervision, it just tells Mix to generate a supervisi
 
 We have already added an app called `ex_ample_backend`. This will act as the datasource for our application. It has VERY limited capabilities. I don't recommend that you read the code unless you have a penchant for punishment. I certainly don't recomend you use it past this exercise.
 
-## Adding a graphql layer
+### Adding a graphql layer
 
 We want to:
 
