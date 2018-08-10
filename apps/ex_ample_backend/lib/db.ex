@@ -26,4 +26,9 @@ defmodule DB do
   def create(data_source, data) do
     data_source.create(data_source, data)
   end
+
+  @doc "Returns all the data in the given data source. So you know, go careful. Useful for debuggin I guess"
+  def all(data_source) do
+    data_source.all(data_source)
+  end
 end

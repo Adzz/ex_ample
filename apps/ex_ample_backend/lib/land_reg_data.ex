@@ -42,6 +42,13 @@ defmodule LandRegData do
   end
 
   @doc """
+  Returns all the rows
+  """
+  def all(server) do
+    GenServer.call(server, {:all})
+  end
+
+  @doc """
   Updates the given record inside the data in the genserver with the given changes.
 
   Yells if you you try and update attribues that the record doesn't have.
@@ -92,6 +99,11 @@ defmodule LandRegData do
     else
       error -> IO.inspect(error)
     end
+  end
+
+  @impl true
+  def handle_call({:all}, _from, data) do
+    {:reply, data, data}
   end
 
   defp starting_data() do
