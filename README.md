@@ -133,3 +133,18 @@ end
 
 ```
 
+## My First Query
+
+Now that we have successfully wired up our new app, we need to be able to query for some data.
+
+Our next challenge will be to implement a new query which will get some data from our database, and expose it in our API. Along the way we will learn how Absinthe looks at things, and what we can do about it.
+
+We will implement a query for the Average Time to Sold (STC) for a given house. The query will work by taking in a house number and a postcode, and it will return the STC for that property as is stored in the db. For our query we will use this example property:
+
+```
+123 Example Lane
+London
+N35 7ED
+```
+
+We will know we have successfully implemented the feature when all the tests are green.
