@@ -4,7 +4,7 @@ defmodule SmokeTest do
 
   # this is important to ensure a clean db between each test
   setup do
-    DB.delete_all(LandRegData)
+    DB.reset_db()
     :ok
   end
 
