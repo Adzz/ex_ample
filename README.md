@@ -139,14 +139,8 @@ Now that we have successfully wired up our new app, we need to be able to query 
 
 Our next challenge will be to implement a new query which will get some data from our database, and expose it in our API. Along the way we will learn how Absinthe looks at things, and what we can do about it.
 
-We will implement a query for the Average Time to Sold (STC) for a given house. The query will work by taking in a house number and a postcode, and it will return the STC for that property as is stored in the db. For our query we will use this example property:
+We will implement a query for all of the addresses we have in our DB, we will know we have successfully implemented the feature when all the tests are green.
 
-```
-123 Example Lane
-London
-N35 7ED
-```
+To get started head to the tests in `apps/graphql/test/integration/my_first_query_test.exs` run them with `mix test` to see them fail. Then head to `apps/graphql/lib/graphql_web/schema.ex` for hints on how to get going.
 
-We will know we have successfully implemented the feature when all the tests are green.
-
-To get started run the tests with `mix test --stale --listen-on-stdin` and head to `apps/graphql/lib/graphql_web/schema.ex` for hints on how to get going.
+When it passes try booting the server with `mix phx.server` then head to `localhost:4000/graphiql` and try running the query using graphiql.

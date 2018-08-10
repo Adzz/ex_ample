@@ -2,6 +2,12 @@ defmodule SmokeTest do
   use GraphqlWeb.ConnCase
   require Graphql.TestHelpers
 
+  # this is important to ensure a clean db between each test
+  setup do
+    DB.delete_all(LandRegData)
+    :ok
+  end
+
   test "Queries the smoke test isThisThingOn successfully", %{conn: conn} do
     query = "{ isThisThingOn }"
 
