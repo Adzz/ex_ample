@@ -11,7 +11,8 @@ defmodule DB.Supervisor do
   @impl true
   def init(:ok) do
     children = [
-      {LandRegData, []}
+      {LandRegData, []},
+      {Address, []}
     ]
 
     Supervisor.init(children, strategy: :one_for_one)

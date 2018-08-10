@@ -168,3 +168,15 @@ end
 ```
 
 This resolver pattern is great groundwork for the architecture of the application as it grows, even if it is overkill right now.
+
+## My first query
+
+Now that we have successfully wired up our new app, we need to be able to query for some data.
+
+Our next challenge will be to implement a new query which will get some data from our database, and expose it in our API. Along the way we will learn how Absinthe looks at things, and what we can do about it.
+
+We will implement a query for all of the addresses we have in our DB, we will know we have successfully implemented the feature when all the tests are green.
+
+To get started head to the tests in `apps/graphql/test/integration/my_first_query_test.exs` run them with `mix test` to see them fail. Then head to `apps/graphql/lib/graphql_web/schema.ex` for hints on how to get going.
+
+When it passes try booting the server with `mix phx.server` then head to `localhost:4000/graphiql` and try running the query using graphiql.
