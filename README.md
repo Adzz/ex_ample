@@ -159,3 +159,5 @@ N35 7ED
 ```
 
 We will know we have successfully implemented the feature when all the tests are green.
+
+To get started run the tests with `mix test --stale --listen-on-stdin` and head to `apps/graphql/lib/graphql_web/schema.ex` for hints on how to get going.
