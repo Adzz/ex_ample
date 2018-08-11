@@ -6,7 +6,9 @@ defmodule DB do
   """
 
   @doc """
-  Returns all the data from the given data source that matches the given attributes
+  Returns all the data from the given data source that matches the given attributes.
+
+  Returns {:error, "Not found"} if there is no match.
 
   ### Examples
       iex>DB.get(LandRegData, postcode: "PO2 OAP", house_number_or_name: 1)
@@ -18,7 +20,7 @@ defmodule DB do
 
   @doc "Updates the given record to have the changes supplied. Returns the updated record"
   def update(record, changes) do
-    data_source = record.module
+    data_source = record.__struct__
     data_source.update(data_source, record, changes)
   end
 
@@ -30,5 +32,31 @@ defmodule DB do
   @doc "Returns all the data in the given data source. So you know, go careful. Useful for debuggin I guess"
   def all(data_source) do
     data_source.all(data_source)
+  end
+
+  @doc """
+  Deletes the given record from within data_source.
+
+  ### Examples
+
+      iex> record = DB.get(LandRegData, postcode: "PO2 OAP", house_number_or_name: 1) |> hd
+      ...> DB.delete(record)
+  """
+  def delete(record) do
+    data_source = record.__struct__
+    data_source.delete(data_source, record)
+  end
+
+  @doc """
+  Deletes all of the data contained in the data source.
+
+  Useful between test runs.
+
+  ### Examples
+
+      iex> DB.delete_all(LandRegData)
+  """
+  def delete_all(data_source) do
+    data_source.delete_all(data_source)
   end
 end

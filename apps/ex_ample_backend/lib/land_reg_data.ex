@@ -10,7 +10,7 @@ defmodule LandRegData do
   """
   use GenServer
 
-  @data_path "apps/ex_ample_backend/lib/data/source.csv"
+  @data_path Path.expand("lib/data/source.csv")
   # could parse this from CSV headers?
   @columns %{
     id: :string,
@@ -21,9 +21,11 @@ defmodule LandRegData do
     average_time_to_sold: :number
   }
   @column_set MapSet.new(Map.keys(@columns))
+  # this should be defined into a behaviour for all data sources
+  # as we rely on it
   def column_set, do: @column_set
 
-  defstruct Map.keys(@columns) ++ [module: __MODULE__]
+  defstruct Map.keys(@columns)
 
   ## Client API
 
@@ -51,7 +53,7 @@ defmodule LandRegData do
   @doc """
   Updates the given record inside the data in the genserver with the given changes.
 
-  Yells if you you try and update attribues that the record doesn't have.
+  Yells if you you try and update attributes that the record doesn't have.
   """
   def update(server, record, changes) do
     GenServer.call(server, {:update, record, changes})
@@ -60,6 +62,16 @@ defmodule LandRegData do
   @doc "Creates a record with the attrs and puts it in the db"
   def create(server, datum) do
     GenServer.call(server, {:create, datum})
+  end
+
+  @doc "removes the given record from the db. Does nothing if it isn't there already"
+  def delete(server, record = %__MODULE__{}) do
+    GenServer.call(server, {:delete, record})
+  end
+
+  @doc "Truncates the data in the DB"
+  def delete_all(server) do
+    GenServer.call(server, {:delete_all})
   end
 
   ## Server Callbacks
@@ -71,6 +83,7 @@ defmodule LandRegData do
 
   @impl true
   def handle_call({:get, attrs}, _from, data) do
+    data |> IO.inspect
     if DB.Utils.attrs_exist_on_model?(attrs, __MODULE__) do
       {:reply, DB.Utils.query_for_attrs(data, attrs), data}
     else
@@ -106,6 +119,27 @@ defmodule LandRegData do
     {:reply, data, data}
   end
 
+  @impl true
+  def handle_call({:delete, record}, _from, data) do
+    new_data =
+      data
+      |> Enum.filter(&(Map.equal?(&1, record)))
+      |> write_to_file()
+
+    {:reply, record, new_data}
+  end
+
+  @impl true
+  def handle_call({:delete_all}, _from, _data) do
+    file = File.open!(@data_path, [:write, :utf8])
+
+    [Map.keys(@columns)]
+    |> CSV.Encoding.Encoder.encode()
+    |> Enum.each(&IO.write(file, &1))
+
+    {:reply, :ok, []}
+  end
+
   defp starting_data() do
     @data_path
     |> File.stream!()
@@ -127,7 +161,6 @@ defmodule LandRegData do
 
     data
     |> Enum.map(&Map.from_struct(&1))
-    |> Enum.map(&Map.drop(&1, [:module]))
     |> CSV.Encoding.Encoder.encode(headers: true)
     |> Enum.each(&IO.write(file, &1))
 
@@ -135,7 +168,7 @@ defmodule LandRegData do
   end
 
   defp cast_data(data) do
-    for {key, value} <- Map.drop(data, [:module]),
+    for {key, value} <- data,
         do: {key, format_data(value, Map.fetch!(@columns, key))},
         into: %{}
   end

@@ -1,16 +1,18 @@
 defmodule DB.Utils do
   def update_record_in_data(record, updated_record, data) do
-    index =
-      Enum.with_index(data)
-      |> Enum.filter(fn {x, _} -> Map.equal?(x, record) end)
-      |> Enum.map(fn {_, i} -> i end)
-      |> hd()
-
+    index = location_of_record_in_data(record, data)
     {:ok, List.update_at(data, index, fn _ -> updated_record end)}
   end
 
+  def location_of_record_in_data(record, data) when is_list(data) do
+    Enum.with_index(data)
+    |> Enum.filter(fn {x, _index} -> Map.equal?(x, record) end)
+    |> Enum.map(fn {_record, i} -> i end)
+    |> hd()
+  end
+
   def apply_changes(old_record, changes) when is_list(changes) do
-    if attrs_exist_on_model?(changes, old_record.module) do
+    if attrs_exist_on_model?(changes, old_record.__struct__) do
       {:ok, Map.merge(old_record, Enum.into(changes, %{}))}
     else
       {:error, "You are trying to change a column that doesn't exist! :("}
@@ -18,7 +20,7 @@ defmodule DB.Utils do
   end
 
   def apply_changes(old_record, changes) when is_map(changes) do
-    if attrs_exist_on_model?(changes, old_record.module) do
+    if attrs_exist_on_model?(changes, old_record.__struct__) do
       {:ok, Map.merge(old_record, changes)}
     else
       {:error, "You are trying to change a column that doesn't exist! :("}
@@ -46,8 +48,11 @@ defmodule DB.Utils do
   end
 
   def query_for_attrs(data, attrs, {attr_name, attr_value}) when length(attrs) > 0 do
-    new_data = Enum.filter(data, fn datum -> Map.fetch!(datum, attr_name) == attr_value end)
-    query_for_attrs(new_data, Enum.drop(attrs, 1), List.first(attrs))
+    Enum.filter(data, fn datum -> Map.fetch!(datum, attr_name) == attr_value end)
+    |> case do
+      [] -> {:error, "No record found with those attrs!"}
+      results -> query_for_attrs(results, Enum.drop(attrs, 1), List.first(attrs))
+    end
   end
 
   def query_for_attrs(data, _, _), do: data
