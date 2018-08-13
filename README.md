@@ -144,3 +144,13 @@ We will implement a query for all of the addresses we have in our DB, we will kn
 To get started head to the tests in `apps/graphql/test/integration/my_first_query_test.exs` run them with `mix test` to see them fail. Then head to `apps/graphql/lib/graphql_web/schema.ex` for hints on how to get going.
 
 When it passes try booting the server with `mix phx.server` then head to `localhost:4000/graphiql` and try running the query using graphiql.
+
+## My second Query
+
+Excellent! Now we have addresses, we can take the id of one of those addresses and implement a query that will allow us to find land reg data for it, specifically the average time to sold for a property.
+
+Again we have a failing test in `apps/graphql/test/integration/my_second_query_test.exs` and some hints on what to do in `schema.ex`.
+
+This time our query will need some args...
+
+

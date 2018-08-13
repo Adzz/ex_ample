@@ -7,6 +7,10 @@ defmodule Graphql.Schema do
     field(:house_number, :integer)
   end
 
+  object :land_reg_data do
+    # add the sub fields here!
+  end
+
   query do
     field :is_this_thing_on, type: :string do
       resolve(&Graphql.Resolver.smoke_test/2)
@@ -15,6 +19,9 @@ defmodule Graphql.Schema do
     field :get_addresses, type: list_of(:address) do
       resolve(&Graphql.Resolver.addresses/2)
     end
+
+    # implement your new query here, this time our field will need an arg... check out the
+    # mutation for a clue
   end
 
   mutation do
