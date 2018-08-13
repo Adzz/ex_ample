@@ -1,5 +1,6 @@
 defmodule Graphql.Schema do
   use Absinthe.Schema
+  import_types(Absinthe.Type.Custom)
 
   object :address do
     field(:id, non_null(:id))
@@ -8,9 +9,12 @@ defmodule Graphql.Schema do
   end
 
   object :land_reg_data do
-    # add the sub fields here!
     field(:address_id, :id)
     field(:average_time_to_sold, :integer)
+  end
+
+  input_object :address_input do
+    # fields for dayz
   end
 
   query do
@@ -29,6 +33,8 @@ defmodule Graphql.Schema do
   end
 
   mutation do
+    # stuff goes here.. but which stuff?
+
     field :echo_text, type: :string do
       arg(:input, :string)
       resolve(&Graphql.Resolver.test_update/2)

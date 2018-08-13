@@ -154,3 +154,9 @@ Again we have a failing test in `apps/graphql/test/integration/my_second_query_t
 This time our query will need some args...
 
 When it passes try booting the server with `mix phx.server` then head to `localhost:4000/graphiql` and try running the query using graphiql.
+
+## My first Mutation
+
+Superb work! We can now query the land reg for data. But what if someone has a house that we haven't heard of yet? We want people to be able to create an address, then query the land reg for that address. For that we need a mutation.
+
+You know how it goes, run the test, watch the one in `apps/graphql/test/integration/my_first_mutation_test.exs` fail, then, you know, make it pass!
