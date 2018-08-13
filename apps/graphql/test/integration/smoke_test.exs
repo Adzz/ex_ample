@@ -21,7 +21,7 @@ defmodule SmokeTest do
   test "Simple echo mutation works correctly", %{conn: conn} do
     mutation = """
     mutation updateEmail($input: String){
-      echo_text(input: $input)
+      echoText(input: $input)
     }
     """
 
@@ -33,6 +33,6 @@ defmodule SmokeTest do
       conn
       |> Graphql.TestHelpers.make_graphql_mutation(mutation, variables)
 
-    assert res["data"] == %{"echo_text" => "test"}
+    assert res["data"] == %{"echoText" => "test"}
   end
 end
