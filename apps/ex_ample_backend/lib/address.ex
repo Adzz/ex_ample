@@ -145,7 +145,7 @@ defmodule Address do
   end
 
   defp transform_to_struct(data) when is_map(data) do
-    struct(__MODULE__, cast_data(data))
+    struct!(__MODULE__, cast_data(data))
   end
 
   defp atomize_keys(map) when is_map(map) do
