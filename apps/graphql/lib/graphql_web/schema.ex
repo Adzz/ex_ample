@@ -21,7 +21,7 @@ defmodule Graphql.Schema do
     end
 
     # implement your new query here, this time our field will need an arg... check out the
-    # mutation for a clues
+    # mutation for a clue
   end
 
   mutation do
