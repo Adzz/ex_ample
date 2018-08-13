@@ -1,10 +1,6 @@
 defmodule Graphql.Resolver do
-<<<<<<< HEAD
   def addresses(_args, _info) do
-=======
-  def land_reg_data(args, _info) do
->>>>>>> Adds failing test for first query
-    # Do your best here:
+    DB.all(Address)
   end
 
   def smoke_test(_args, _info) do
