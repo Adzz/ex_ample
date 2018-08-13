@@ -14,9 +14,11 @@ defmodule MySecondQueryTest do
     {:ok, land_reg_data} =
       DB.create(LandRegData, %{address_id: address.id, average_time_to_sold: 420})
 
-    query = "query landRegQuery($addressId: ID!){
-        landRegData(addressId: $addressId) { averageTimeToSold }
-      }"
+    query = """
+    query landRegQuery($addressId: ID!){
+      landRegData(addressId: $addressId) { averageTimeToSold }
+    }
+    """
 
     variables = """
     {
