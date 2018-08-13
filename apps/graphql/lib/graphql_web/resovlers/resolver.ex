@@ -1,6 +1,10 @@
 defmodule Graphql.Resolver do
   def addresses(_args, _info) do
+<<<<<<< HEAD
     # Do your best here:
+=======
+    DB.all(Address)
+>>>>>>> implements my first query
   end
 
   def smoke_test(_args, _info) do
