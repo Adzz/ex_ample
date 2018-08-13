@@ -6,6 +6,8 @@ defmodule Graphql.Schema do
     field(:id, non_null(:id))
     field(:postcode, :string)
     field(:house_number, :integer)
+    # this is new, check out the resolver:
+    field(:formatted_address, :string, resolve: &AddressResolver.formatted_address/3)
   end
 
   object :land_reg_data do
@@ -14,7 +16,8 @@ defmodule Graphql.Schema do
   end
 
   input_object :address_input do
-    # fields for dayz
+    field(:postcode, :string)
+    field(:house_number, :integer)
   end
 
   query do
@@ -33,7 +36,10 @@ defmodule Graphql.Schema do
   end
 
   mutation do
-    # stuff goes here.. but which stuff?
+    field :create_address, type: :address do
+      arg(:input, :address_input)
+      resolve(&Graphql.Resolver.create_address/2)
+    end
 
     field :echo_text, type: :string do
       arg(:input, :string)

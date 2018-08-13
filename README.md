@@ -160,3 +160,17 @@ When it passes try booting the server with `mix phx.server` then head to `localh
 Superb work! We can now query the land reg for data. But what if someone has a house that we haven't heard of yet? We want people to be able to create an address, then query the land reg for that address. For that we need a mutation.
 
 You know how it goes, run the test, watch the one in `apps/graphql/test/integration/my_first_mutation_test.exs` fail, then, you know, make it pass!
+
+## My first resolving function
+
+Okay, so technically it isn't your first resolving function. We have been using resolver functions when we wrote things in our schema like:
+
+```elixir
+resolve(&Graphql.Resolver.addresses/2)
+```
+
+The clue was in the name. However, this time we are going to take resolving functions one step futher - to the graphql types that we are returning.
+
+The scenario is this, we want to be able to return a formatted address for a given property. To do this, we need to get the postcode and house number from the address and return it formatted nicely in a string. We then want to expose that string as a field on the address type, called `formatted_address`
+
+We have written a test (`apps/graphql/test/integration/my_first_resolving_function_test.exs`), work your magic to bring green to the land.
