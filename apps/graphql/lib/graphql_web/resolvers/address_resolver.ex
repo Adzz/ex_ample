@@ -3,5 +3,6 @@ defmodule AddressResolver do
     # implement your function here. Beware, there are unit
     # tests for this funciton in graphql/test/lib/resolvers/address_resolver_test.exs
     # they should also be green!
+    {:ok, "#{house_number} #{postcode}"}
   end
 end
