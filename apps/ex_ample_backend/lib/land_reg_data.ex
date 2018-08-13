@@ -15,8 +15,7 @@ defmodule LandRegData do
   @columns %{
     id: :string,
     sale_price: :number,
-    postcode: :string,
-    house_number: :number,
+    address_id: :string,
     date_sold: :date,
     average_time_to_sold: :number
   }
@@ -122,7 +121,7 @@ defmodule LandRegData do
   def handle_call({:delete, record}, _from, data) do
     new_data =
       data
-      |> Enum.filter(&(Map.equal?(&1, record)))
+      |> Enum.filter(&Map.equal?(&1, record))
       |> write_to_file()
 
     {:reply, {:ok, record}, new_data}
