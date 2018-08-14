@@ -38,6 +38,6 @@ config :phoenix, :stacktrace_depth, 20
 
 # Allow GraphQL requests from client application.
 config :cors_plug,
-  origin: ["http://nested.test", "localhost"],
+  origin: ["*"],
   max_age: 86400,
   methods: ["GET", "POST"]
