@@ -6,7 +6,6 @@ defmodule Graphql.Schema do
     field(:id, non_null(:id))
     field(:postcode, :string)
     field(:house_number, :integer)
-    # this is new, check out the resolver:
     field(:formatted_address, :string, resolve: &AddressResolver.formatted_address/3)
   end
 
