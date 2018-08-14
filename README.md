@@ -88,6 +88,7 @@ mix phx.new graphql --no-ecto --no-brunch --no-html
       {:phoenix_pubsub, "~> 1.0"},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
+      # these are the deps we added:
       {:absinthe, "~> 1.4.0"},
       {:absinthe_plug, "~> 1.4.0"},
       {:jason, "~> 1.1"}
@@ -138,11 +139,35 @@ defmodule Graphql.Schema do
   use Absinthe.Schema
 
   query do
-    field(:hello, type: :string, resolve: fn _, _, _ -> {:ok, "It's alive"} end)
+    field :is_this_thing_on, type: :string do
+      resolve(&Graphql.Resolver.smoke_test/2)
+    end
+  end
+
+  mutation do
+    field :echo_text, type: :string do
+      arg(:input, :string)
+      resolve(&Graphql.Resolver.test_update/2)
+    end
   end
 end
-
 ```
+
+We then added a resolver file here: `apps/graphql/lib/graphql_web/resolvers/resolver.ex` which looked like this:
+
+```elixir
+defmodule Graphql.Resolver do
+  def smoke_test(_args, _info) do
+    {:ok, "Yes!"}
+  end
+
+  def test_update(%{input: input}, _info) do
+    {:ok, input}
+  end
+end
+```
+
+This resolver pattern is great groundwork for the architecture of the application as it grows, even if it is overkill right now.
 
 ## My First Query
 
