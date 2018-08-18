@@ -20,6 +20,7 @@ defmodule DB do
       iex> DB.get(LandRegData, postcode: "PO2 OAP", house_number_or_name: 1)
       [%LandRegData{id: 1, house_number_or_name: "1", postcode: "PO2 OAP", sale_price: 200_000, date_sold: ~D[1975-05-05]}]
   """
+  @spec get(atom(), map | list(any)) :: {:ok, list(map)} | {:error, binary()}
   def get(data_source, attrs) do
     data_source.get(data_source, attrs)
   end

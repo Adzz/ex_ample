@@ -172,6 +172,6 @@ defmodule Address do
   defp format_data(nil, _), do: nil
   defp format_data("", type) when type not in [:string], do: nil
   defp format_data(datum, :number), do: String.to_integer(datum)
-  defp format_data(datum, :date), do: Date.from_iso8601!(datum)
+
   defp format_data(datum, :string), do: datum
 end
