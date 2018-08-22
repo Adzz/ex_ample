@@ -1,5 +1,16 @@
 # ExAmple
 
+This repo is designed to help you get familiar with building graphql APIs using elixir. The idea is to step through the branches completing the exercises outlined in the readme as you go. Step through the branches in this order:
+
+```
+master
+add-phoenix
+my-first-query
+my-second-query
+my-first-mutation
+my-first-resolving-function
+```
+
 ## Umbrella projects - Coding in the Rain
 
 [Umbrella projects](https://8thlight.com/blog/georgina-mcfadyen/2017/05/01/elixir-umbrella-projects.html) are a great way to manage internal dependancies for your applications. Internal dependencies can be thought of as libraries that can sit on their own - but that you don't want to or cannot open source. They are things that you can configure their own relases for (so can be released independently from the rest of the application), but are conveniently grouped together into one git repo.
