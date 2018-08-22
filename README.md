@@ -126,7 +126,7 @@ mix phx.new graphql --no-ecto --no-brunch --no-html
       Absinthe.Plug.GraphiQL,
       schema: Graphql.Schema,
       json_codec: Jason,
-      default_url: "/graphql",
+      default_url: "/graphiql",
       interface: :advanced
     )
   end
