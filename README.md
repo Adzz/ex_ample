@@ -29,7 +29,6 @@ Today we will be looking at a small example of how you might structure an umbrel
 
 ## Getting Started - How did we get here?
 
-
 So far to create this repo, we first ran this task:
 
 ```sh
@@ -38,9 +37,7 @@ mix new ex_ample --umbrella
 
 The name of the app is `ex_ample`, and the umbrella flag does exactly what you think it does.
 
-
 ### Adding to the umbrella
-
 
 To add new apps to the umbrella project we can do this (from the root of the project):
 
@@ -50,21 +47,20 @@ cd apps && mix new name_of_the_app --sup
 
 The `sup` flag stands for supervision, it just tells Mix to generate a supervision tree automatically for us, instead of having to build one manually. More in [the docs 👩‍⚕️](https://elixir-lang.org/getting-started/mix-otp/dependencies-and-umbrella-projects.html#dont-drink-the-kool-aid)
 
-
 We have already added an app called `ex_ample_backend`. This will act as the datasource for our application. It has VERY limited capabilities. I don't recommend that you read the code unless you have a penchant for punishment. I certainly don't recomend you use it past this exercise.
 
 ### Adding a graphql layer
 
 We want to:
 
-  1. Add a new app to the umbrella project. Call it what you like, but it will act as the webserver layer for this project. It should be a phoenix app, but we don't need ecto, html, or brunch!
-  2. Add the following deps to it:
-    - [Absinthe](https://github.com/absinthe-graphql/absinthe)
-    - [Jason](https://github.com/michalmuskala/jason)
-    - [Absinthe Plug](https://github.com/absinthe-graphql/absinthe_plug)
-  3. Alter the plug for parsing JSON to use the Jason lib (the default is Poison)
-  4. Add a route for graphql requests
-  5. Add a route for [graphiql](https://github.com/graphql/graphiql) requests (they are different things!), but only for dev
-  6. Make a successful `hello` request using graphiql
+1. Add a new app to the umbrella project. Call it what you like, but it will act as the webserver layer for this project. It should be a phoenix app, but we don't need ecto, html, or brunch!
+2. Add the following deps to it:
+   - [Absinthe](https://github.com/absinthe-graphql/absinthe)
+   - [Jason](https://github.com/michalmuskala/jason)
+   - [Absinthe Plug](https://github.com/absinthe-graphql/absinthe_plug)
+3. Alter the [plug](https://elixirschool.com/en/lessons/specifics/plug/) for parsing JSON to use the Jason lib (the default is Poison)
+4. Add a route for graphql requests
+5. Add a route for [graphiql](https://github.com/graphql/graphiql) requests (they are different things!), but only for dev
+6. Make a successful `hello` request using graphiql
 
 But do not fear, we will step through this together!
