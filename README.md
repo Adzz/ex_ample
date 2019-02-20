@@ -58,9 +58,8 @@ We want to:
    - [Absinthe](https://github.com/absinthe-graphql/absinthe)
    - [Jason](https://github.com/michalmuskala/jason)
    - [Absinthe Plug](https://github.com/absinthe-graphql/absinthe_plug)
-3. Alter the [plug](https://elixirschool.com/en/lessons/specifics/plug/) for parsing JSON to use the Jason lib (the default is Poison)
-4. Add a route for graphql requests
-5. Add a route for [graphiql](https://github.com/graphql/graphiql) requests (they are different things!), but only for dev
-6. Make a successful `hello` request using graphiql
+3. Add a route for graphql requests
+4. Add a route for [graphiql](https://github.com/graphql/graphiql) requests (they are different things!), but only for dev
+5. Make a successful `hello` request using graphiql
 
 But do not fear, we will step through this together!
