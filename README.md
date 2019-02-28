@@ -44,7 +44,7 @@ To add new apps to the umbrella project we can do this (from the root of the pro
 cd apps && mix new name_of_the_app --sup
 ```
 
-The `sup` flag stands for supervision, it just tells Mix to generate a [supervision tree](https://stackoverflow.com/questions/46554449/erlang-elixir-what-is-a-supervision-tree) automatically for us, instead of having to build one manually. More in [the docs 👩‍⚕️](https://elixir-lang.org/getting-started/mix-otp/dependencies-and-umbrella-projects.html#dont-drink-the-kool-aid)
+The `sup` flag stands for supervision, it just tells Mix to generate a [supervision tree](https://stackoverflow.com/questions/46554449/erlang-elixir-what-is-a-supervision-tree) automatically for us, instead of having to build one manually. More in [the docs 👩‍⚕️](https://elixir-lang.org/getting-started/mix-otp/dependencies-and-umbrella-projects.html)
 
 We have already added an app called `ex_ample_backend`. This will act as the datasource for our application. It has VERY limited capabilities. I don't recommend that you read the code unless you have a penchant for punishment. I certainly don't recomend you use it past this exercise.
 
