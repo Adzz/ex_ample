@@ -40,3 +40,9 @@ The clue was in the name. However, this time we are going to take resolving func
 The scenario is this, we want to be able to return a formatted address for a given property. To do this, we need to get the postcode and house number from the address and return it formatted nicely in a string. We then want to expose that string as a field on the address type, called `formatted_address`
 
 We have written a test (`apps/graphql/test/integration/my_first_resolving_function_test.exs`), work your magic to bring green to the land.
+
+
+## Tests passing?
+
+You're done! 🙌🏼🥳 Congratulations on completing this workshop. You can find answers to the above and completed workshop at `my-first-complete-api`.
+
